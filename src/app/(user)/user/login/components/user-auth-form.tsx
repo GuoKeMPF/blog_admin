@@ -4,11 +4,16 @@ import { Button, FormDescription, Input, Form, FormField, FormLabel, FormMessage
 import { useLogin } from "@/hooks";
 import { encrypt } from "@/lib"
 
+import { useToast } from "@/components/ui"
+
 import { useRouter } from 'next/navigation'
 import * as React from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+
+
+
 
 
 
@@ -27,13 +32,24 @@ type FormType = z.infer<typeof formSchema>
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-
+  const { toast } = useToast()
   const router = useRouter()
   const onLoginSuccess = () => {
+    toast({
+      title: "登录成功",
+      description: "欢迎回来",
+    })
     router.replace('/')
   }
 
-  const onLoginError = () => {
+  const onLoginError = (error: Error) => {
+    console.log(error);
+
+    toast({
+      title: "登录失败",
+      description: error.message,
+      variant: "destructive",
+    })
     form.reset()
   }
 
@@ -101,6 +117,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                   type="password"
                   autoCapitalize="none"
                   autoCorrect="off"
+                  autoComplete="off"
                   disabled={loading} />
               </FormControl>
               <FormDescription>

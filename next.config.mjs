@@ -1,4 +1,4 @@
-import million from 'million/compiler'
+// import million from 'million/compiler'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -18,12 +18,13 @@ const nextConfig = {
   },
 };
 
-const millionConfig = {
-  auto: {
-    rsc: true
-  }
-}
+// const millionConfig = {
+//   auto: {
+//     rsc: true
+//   },
+//   rsc: true
+// }
 
-const config = million.next(nextConfig, millionConfig)
+// const config = million.next(nextConfig, millionConfig)
 
-export default config;
+export default nextConfig;

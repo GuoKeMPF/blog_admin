@@ -4,7 +4,7 @@ import { useState } from "react";
 
 interface UseLoginType {
   onSuccess?: () => void;
-  onError?: () => void;
+  onError?: (error: Error) => void;
 }
 
 interface UseLoginReturnType {
@@ -22,8 +22,8 @@ export const useLogin = ({ onSuccess, onError }: UseLoginType): UseLoginReturnTy
       const res = await login(data);
       setLoading(false);
       onSuccess && onSuccess();
-    } catch (error) {
-      onError && onError();
+    } catch (error: any) {
+      onError && onError(error as Error);
     }
     setLoading(false);
   }

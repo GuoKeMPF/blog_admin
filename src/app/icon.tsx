@@ -1,5 +1,5 @@
 import { ImageResponse } from 'next/og'
-import favicon from "@/assets/images/favicon.ico";
+
 export const runtime = 'edge'
 export const size = {
   width: 32,

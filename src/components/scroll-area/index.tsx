@@ -6,7 +6,7 @@ import { HTMLAttributes, FC } from 'react'
 
 
 interface ScrollAreaProps extends HTMLAttributes<HTMLDivElement> {
-  useScrollAreaId: boolean
+  useScrollAreaId?: boolean
 }
 
 export const ScrollArea: FC<ScrollAreaProps> = ({ useScrollAreaId = false, className, ...rest }) => (
