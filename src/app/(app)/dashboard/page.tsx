@@ -1,4 +1,4 @@
-import { Dashboard as DashboardComponent } from "./components";
+import { DashboardComponents } from "./components";
 
 import { Metadata } from "next/types";
 import React, { Fragment, type FC } from "react";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const Dashboard: FC = async () => {
 
   return <Fragment>
-    <DashboardComponent />
+    <DashboardComponents />
   </Fragment>;
 };
 export default Dashboard

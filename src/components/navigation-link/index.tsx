@@ -50,13 +50,14 @@ export const NavigationLink = memo(
         key={href}
         href={href}
         className={cn(
-          'group flex items-center justify-between rounded-lg p-4'
+          'group flex items-center justify-between rounded-lg p-4',
+          isActive ? 'bg-primary text-primary-foreground' : 'hover:bg-muted'
         )}
       >
         <span className="flex items-center gap-2">
           {iconCmp}
           <span
-            className={cn('font-medium')}
+            className={cn('font-medium', isActive && 'text-primary-foreground')}
           >
             {label}
           </span>
@@ -64,7 +65,8 @@ export const NavigationLink = memo(
         {shortcut_key && (
           <span
             className={cn(
-              'hidden h-5 w-5 place-content-center rounded border border-gray-200 text-xs font-medium  transition-colors duration-200  lg:grid',)}
+              'hidden h-5 w-5 place-content-center rounded border border-foreground text-xs font-medium  transition-colors duration-200  lg:grid',
+              isActive && 'border-muted')}
             title={`Shortcut key: ${shortcut_key}`}
           >
             {shortcut_key}

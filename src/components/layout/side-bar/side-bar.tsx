@@ -52,7 +52,7 @@ export const SideBar = ({ title, href, isInner, className }: SideBarProps) => {
           </div>
         </div>
       )}
-      <div className="p-3">
+      <div className="p-2">
         <MenuContent />
       </div>
     </ScrollArea>

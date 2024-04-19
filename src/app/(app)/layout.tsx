@@ -19,14 +19,15 @@ export default function RootLayout({
 }>) {
 
   return (
-    <div className="min-h-screen flex lg:gap-4">
+    <div className="min-h-screen flex">
       <aside className="lg:flex bg-background">
         <SideBar className="relative hidden lg:flex lg:min-h-100lvh" />
       </aside>
       <div className="flex flex-1">
         <ScrollArea className="flex flex-col">
           <NavHeader scrollTitle="M" />
-          {children}
+          <div className="px-8 py-4">
+            {children}</div>
         </ScrollArea>
       </div>
     </div>
