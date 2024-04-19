@@ -5,8 +5,6 @@ type LayoutProps = {
 };
 
 const Layout: FC<LayoutProps> = ({ children }) => {
-
-  console.log("login Layout");
   return (
     <Fragment>
       {children}

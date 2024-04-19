@@ -1,6 +1,7 @@
 "use client"
 
 import { Toaster } from "@/components/ui"
+import { ThemeProvider } from "@/components/theme-provider";
 
 import { Inter } from "next/font/google";
 
@@ -18,10 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.className}`}>
+    <html lang="en" className={`${inter.className}`} suppressHydrationWarning>
       <body>
-        {children}
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange>
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );

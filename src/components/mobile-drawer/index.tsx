@@ -17,9 +17,9 @@ export function MobileDrawer() {
 				<Icons.Logo />
 			</DrawerTrigger>
 			<DrawerContent>
-				<div className="flex-1 overflow-y-auto rounded-t-lg bg-white">
-					<div className="pointer-events-none sticky inset-x-0 top-0 flex h-10 items-center justify-center overflow-hidden bg-white">
-						<div className="h-1.5 w-12 shrink-0 rounded-full bg-gray-300" />
+				<div className="flex-1 overflow-y-auto rounded-t-lg ">
+					<div className="pointer-events-none sticky inset-x-0 top-0 flex h-10 items-center justify-center overflow-hidden">
+						<div className="h-1.5 w-12 shrink-0 rounded-full " />
 					</div>
 					<div className="p-4">
 						<MenuContent />

@@ -44,10 +44,7 @@ function generateKeyCodePathnameMapping(
     map: typeof mapping
 ) {
     return params.reduce((pre, cur) => {
-        console.log(cur)
-
         if ('children' in cur) {
-            console.log(cur.children)
             generateKeyCodePathnameMapping(cur.children, map)
         } else {
             const routeItem = cur as SideBarRoute
@@ -59,8 +56,6 @@ function generateKeyCodePathnameMapping(
 }
 
 generateKeyCodePathnameMapping(sideBarRoutes, mapping)
-
-console.log(mapping)
 
 export const keyCodePathnameMapping = mapping
 export const eventKeyTrigger = eventKey

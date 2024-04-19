@@ -43,8 +43,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   }
 
   const onLoginError = (error: Error) => {
-    console.log(error);
-
     toast({
       title: "登录失败",
       description: error.message,

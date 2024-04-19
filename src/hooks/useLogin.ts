@@ -5,6 +5,7 @@ import { useState } from "react";
 interface UseLoginType {
   onSuccess?: () => void;
   onError?: (error: Error) => void;
+  onFinally?: () => void;
 }
 
 interface UseLoginReturnType {
@@ -12,7 +13,7 @@ interface UseLoginReturnType {
   loading: boolean;
 }
 
-export const useLogin = ({ onSuccess, onError }: UseLoginType): UseLoginReturnType => {
+export const useLogin = ({ onSuccess, onError, onFinally }: UseLoginType): UseLoginReturnType => {
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -24,8 +25,10 @@ export const useLogin = ({ onSuccess, onError }: UseLoginType): UseLoginReturnTy
       onSuccess && onSuccess();
     } catch (error: any) {
       onError && onError(error as Error);
+    } finally {
+      onFinally && onFinally();
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   return { onLogin, loading }

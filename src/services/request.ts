@@ -1,4 +1,4 @@
-import { API_URL, SSR_API_URL } from "@/lib";
+import { API_URL, SSR_API_URL, unAuthCode } from "@/lib";
 
 import axios, { AxiosRequestConfig } from "axios";
 import { redirect } from 'next/navigation'
@@ -9,12 +9,21 @@ const instance = axios.create({
   withCredentials: true, // send cookies when cross-domain requests
 });
 
+export const errorHandler = (error: any) => {
+  console.log('error?.response?.status', error?.response?.status);
+  if (error?.response?.status === unAuthCode.Unauthorized || error?.response?.status === unAuthCode.ProxyAuthenticationRequired) {
+    redirect('/user/login');
+  }
+}
+
+
+
 instance.interceptors.response.use(
   async (response) => {
     return response.data;
   },
   (error) => {
-    console.log(error.message); // for debug
+    errorHandler(error)
     return Promise.reject(error);
   }
 );
@@ -27,47 +36,6 @@ export const fetch = async (
   return res;
 };
 
-const SSRinstance = axios.create({
-  baseURL: SSR_API_URL,
-  timeout: 60000,
-  withCredentials: true, // send cookies when cross-domain requests
-});
-
-SSRinstance.interceptors.response.use(
-  async (response) => {
-    return response.data;
-  },
-  (error) => {
-    console.log(error.message); // for debug
-    return Promise.reject(error);
-  }
-);
-
-export const fetchWithCookie = async (
-  url: string,
-  cookies: string,
-  config?: AxiosRequestConfig
-): Promise<any> => {
-  const _config = { ...config, headers: { ...config?.headers, Cookie: cookies } };
-  const res = await SSRinstance(url, _config);
-  return res;
-};
-
-instance.interceptors.response.use(
-  async (response) => {
-    console.log(response);
-    return response;
-  },
-  (error) => {
-
-    if (error.status === 403) {
-      redirect('/user/login');
-    }
-
-    console.log(error.message); // for debug
-    return Promise.reject(error);
-  }
-);
 /**
  * @param url Required request url
  * @param params Optional the params with get request
@@ -145,5 +113,45 @@ export const Upload = async (url: string, data?: FormData, options?: Record<stri
     data,
     ...options,
   });
+
+
+
+
+
+const SSRinstance = axios.create({
+  baseURL: SSR_API_URL,
+  timeout: 60000,
+  withCredentials: true, // send cookies when cross-domain requests
+});
+
+SSRinstance.interceptors.response.use(
+  async (response) => {
+    return response.data;
+  },
+  (error) => {
+    // !todo
+    // 在这个地方调用和在后面调用为啥还不一样
+    // errorHandler(error)
+    return Promise.reject(error);
+  }
+);
+
+/**
+ * @param url Required request url
+ * @param params Optional the params with get request
+ * @param options Optional something config for request
+ * @returns promise
+ */
+export const SSRGet = (
+  url: string,
+  params?: Record<string, any>,
+  options?: Record<string, any>,
+): Promise<any> =>
+  SSRinstance(url, {
+    method: 'get',
+    params,
+    ...options,
+  });
+
 
 export default instance;
