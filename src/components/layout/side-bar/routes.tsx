@@ -35,6 +35,22 @@ export const sideBarRoutes: SideBarRoutes = [
             },
         ],
     },
+    {
+        title: 'Picture',
+        key: 'Digit4',
+        shortcut_key: 4,
+        path: '/picture',
+        icon: <Icons.Photo />,
+        type: 'route',
+    },
+    {
+        title: 'Audio',
+        key: 'Digit5',
+        shortcut_key: 5,
+        path: '/audio',
+        icon: <Icons.Music />,
+        type: 'route',
+    },
 ]
 
 const mapping: Map<string, string> = new Map()

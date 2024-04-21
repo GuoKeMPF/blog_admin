@@ -1,5 +1,8 @@
-import { Metadata } from 'next/types'
+import { columns } from './components/columns'
+import { DataTable } from './components/data-table'
+
 import React, { Fragment, type FC } from 'react'
+import { Metadata } from 'next/types'
 
 export const metadata: Metadata = {
     title: '数据中心 - 草稿',
@@ -9,7 +12,11 @@ export const metadata: Metadata = {
 type DraftProps = {}
 
 export const Draft: FC<DraftProps> = ({}) => {
-    return <Fragment>Draft</Fragment>
+    return (
+        <Fragment>
+            <DataTable data={[]} columns={columns} />
+        </Fragment>
+    )
 }
 
 export default Draft
