@@ -1,6 +1,16 @@
+export type PaginationTotalType = number
+export type ID = string
+
+export interface RequestPaginationType {
+  page?: number;
+  size?: number;
+}
+
+
+
 export interface PaginationType<T> {
   data: T[];
-  count: number,
+  count: PaginationTotalType,
   size: number,
   page: number,
 }
@@ -30,19 +40,11 @@ export interface DraftType {
   content: string;
   title: string;
   description: string;
-  views: boolean;
-  [key: string]: any;
+  views: number;
 }
 
-
-export type Draft = {
-  id: string;
-  content: string;
-  title: string;
-  description: string;
-  [key: string]: any;
-};
 export type Drafts = DraftType[];
+export interface DraftsResponseType extends PaginationType<DraftType> { }
 
 
 export type PictureType = {
