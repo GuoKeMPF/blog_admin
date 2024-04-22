@@ -57,10 +57,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				disabled={disabled}
 				{...props}
 			>
-				{loading && (
-					<Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
-				)}
-				{children}
+				{/* 
+				span 作用是 当使用 asChild 时，需要一个实体 dom 合并样式
+				*/}
+				<span>
+					{loading && (
+						<Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
+					)}
+					{children}
+				</span>
 			</Comp>
 		)
 	}
