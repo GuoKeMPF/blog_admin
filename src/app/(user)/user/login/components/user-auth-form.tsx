@@ -35,19 +35,10 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const { toast } = useToast()
   const router = useRouter()
   const onLoginSuccess = () => {
-    toast({
-      title: "登录成功",
-      description: "欢迎回来",
-    })
     router.replace('/')
   }
 
   const onLoginError = (error: Error) => {
-    toast({
-      title: "登录失败",
-      description: error.message,
-      variant: "destructive",
-    })
     form.reset()
   }
 

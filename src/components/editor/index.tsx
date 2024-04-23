@@ -1,43 +1,44 @@
-"use client"
+'use client'
 
-import { uploadImage } from '@/services/upload';
+import { uploadImage } from '@/services/upload'
 
-import { Skeleton } from '@/components/ui';
+import { Skeleton } from '@/components/ui'
 
+import { Editor as TEditor } from '@tinymce/tinymce-react'
 
-import { Editor as TEditor } from '@tinymce/tinymce-react';
-
-import { FC, Fragment, useState, useRef } from 'react';
+import { FC, Fragment, useState, useRef } from 'react'
 import Script from 'next/script'
 
 interface EditorProps {
-	onChange?: (value: string) => void;
-	value?: string;
+	onChange?: (value: string) => void
+	value?: string
 }
 
-
 export const Editor: FC<EditorProps> = ({ onChange, value = '' }) => {
-	const [loading, setLoading] = useState<boolean>(true);
-	const initValue = useRef<string>(value);
+	const [loading, setLoading] = useState<boolean>(true)
+	const initValue = useRef<string>(value)
 	const change = (v: string) => {
 		if (onChange) {
-			onChange(v);
+			onChange(v)
 		}
-	};
+	}
 
 	const mounted = () => {
-		setLoading(false);
-	};
+		setLoading(false)
+	}
 
 	return (
 		<Fragment>
 			<TEditor
 				initialValue={initValue}
-				tinymceScriptSrc={[{
-					src: "/editor/tinymce.min.js",
-					async: false,
-					defer: false,
-				}]}
+				licenseKey="gpl"
+				tinymceScriptSrc={[
+					{
+						src: '/editor/tinymce.min.js',
+						async: false,
+						defer: false,
+					},
+				]}
 				onInit={mounted}
 				init={{
 					// 选定元素
@@ -72,7 +73,8 @@ export const Editor: FC<EditorProps> = ({ onChange, value = '' }) => {
             | ltr rtl`,
 					toolbar_sticky: true,
 					toolbar_mode: 'wrap',
-					fontsize_formats: '12px 14px 16px 18px 24px 36px 48px 56px 72px',
+					fontsize_formats:
+						'12px 14px 16px 18px 24px 36px 48px 56px 72px',
 					font_formats:
 						'微软雅黑=Microsoft YaHei,Helvetica Neue,PingFang SC,sans-serif;苹果苹方=PingFang SC,Microsoft YaHei,sans-serif;宋体=simsun,serif;仿宋体=FangSong,serif;黑体=SimHei,sans-serif;Arial=arial,helvetica,sans-serif;Arial Black=arial black,avant garde;Book Antiqua=book antiqua,palatino;',
 					// 显示的不可见字符的功能（空格回车）
@@ -100,6 +102,6 @@ export const Editor: FC<EditorProps> = ({ onChange, value = '' }) => {
 				onEditorChange={change}
 			/>
 		</Fragment>
-	);
-};
-export default Editor;
+	)
+}
+export default Editor
