@@ -30,6 +30,7 @@ export const Editor: FC<EditorProps> = ({ onChange, value = '' }) => {
 	return (
 		<Fragment>
 			<TEditor
+				promotion={true}
 				initialValue={initValue}
 				licenseKey="gpl"
 				tinymceScriptSrc={[
@@ -56,7 +57,7 @@ export const Editor: FC<EditorProps> = ({ onChange, value = '' }) => {
 					plugins: `print preview paste importcss searchreplace autolink
             autosave save directionality code html visualblocks visualchars fullscreen
             image link media template codesample table charmap hr pagebreak
-            nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools
+            nonbreaking anchor insertdatetime advlist lists wordcount imagetools
             textpattern noneditable help charmap quickbars emoticons`,
 					menubar: 'file edit view insert format tools table help',
 					toolbar: `undo redo fullscreen |
