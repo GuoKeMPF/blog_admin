@@ -2,21 +2,21 @@
 
 import { uploadImage } from '@/services/upload'
 
-import { Skeleton } from '@/components/ui'
 
 import { Editor as TEditor } from '@tinymce/tinymce-react'
 
-import { FC, Fragment, useState, useRef } from 'react'
-import Script from 'next/script'
+import { FC, Fragment, useState } from 'react'
 
 interface EditorProps {
-	onChange?: (value: string) => void
-	value?: string
+	value?: string,
+	placeholder?: string,
+	onChange?: (v: string) => void
 }
 
-export const Editor: FC<EditorProps> = ({ onChange, value = '' }) => {
+export const Editor: FC<EditorProps> = ({ onChange, value = '', ...others }) => {
+
 	const [loading, setLoading] = useState<boolean>(true)
-	const initValue = useRef<string>(value)
+	const [initValue] = useState<string>(value || '')
 	const change = (v: string) => {
 		if (onChange) {
 			onChange(v)
@@ -30,6 +30,7 @@ export const Editor: FC<EditorProps> = ({ onChange, value = '' }) => {
 	return (
 		<Fragment>
 			<TEditor
+				{...others}
 				promotion={true}
 				initialValue={initValue}
 				licenseKey="gpl"

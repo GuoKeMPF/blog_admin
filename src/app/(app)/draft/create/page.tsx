@@ -1,7 +1,10 @@
-import { DraftForm } from "./components";
+import { CreateDraftPage } from "./components";
+
+
 
 import React, { Fragment, type FC } from 'react'
 import { Metadata } from 'next/types'
+
 
 
 
@@ -10,14 +13,13 @@ export const metadata: Metadata = {
 	description: '数据中心 - 编辑草稿',
 }
 
-type DraftProps = {}
 
-export const Draft: FC<DraftProps> = ({ }) => {
+export const Draft: FC = ({ }) => {
 
 
 	return (
 		<Fragment>
-			<DraftForm />
+			<CreateDraftPage />
 		</Fragment>
 	)
 }

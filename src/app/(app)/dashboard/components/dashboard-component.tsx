@@ -2,7 +2,8 @@
 
 import { Summary, Plots } from ".";
 
-import { useDraft } from "@/hooks";
+import { useDashboard } from "@/hooks";
+import { Error } from "@/components/error";
 
 import React, { Fragment, type FC } from "react";
 
@@ -11,14 +12,14 @@ type DashboardProps = {
 };
 
 export const DashboardComponents: FC<DashboardProps> = ({ }) => {
-	const { data, isError, reFetch, loading } = useDraft()
+	const { data, isError, reFetch, loading } = useDashboard()
+
+	if (isError) {
+		return <Error></Error>
+	}
 
 	return <Fragment>
-		{
-			!isError && <Fragment>
-				<Summary data={data!} loading={loading} />
-				<Plots data={data!} loading={loading} />
-			</Fragment>
-		}
-	</Fragment>;
+		<Summary data={data!} loading={loading} />
+		<Plots data={data!} loading={loading} />
+	</Fragment>
 };

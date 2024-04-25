@@ -92,7 +92,6 @@ export function DataTable<TData, TValue>({
 
 	return (
 		<Card>
-
 			<CardHeader>
 				<DataTableToolbar table={table} action={action} />
 			</CardHeader>
@@ -158,8 +157,6 @@ export function DataTable<TData, TValue>({
 				}
 				<DataTablePagination table={table} />
 			</CardContent>
-
-
 		</Card>
 	)
 }

@@ -2,7 +2,7 @@ import { ScrollArea } from '@/components/scroll-area'
 
 import { SideBar } from '@/components/layout'
 
-import { NavHeader } from '@/components/nav-header'
+import { NavHeader } from '@/components/layout/header'
 
 import type { Metadata } from 'next'
 

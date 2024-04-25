@@ -9,10 +9,13 @@ import { UnAuthCode } from "@/interface";
 /**
  * 请求常量配置
  */
-export const unAuthCode: Record<'Unauthorized' | 'ProxyAuthenticationRequired', UnAuthCode> = {
-  Unauthorized: 401,
-  ProxyAuthenticationRequired: 407
+export const unAuthCode: Record<'Unauthorized' | 'ProxyAuthenticationRequired' | 'Forbidden', UnAuthCode> = {
+	Unauthorized: 401,
+	Forbidden: 403,
+	ProxyAuthenticationRequired: 407
 }
+
+export const unAuthCodeSet = new Set(Object.values(unAuthCode))
 
 
 
