@@ -1,16 +1,18 @@
-"use client"
+'use client'
 
-import { DraftForm } from "./";
+import { DraftForm } from '../../components'
 
-import { useCreateDraft } from "@/hooks";
+import { useCreateDraft } from '@/hooks'
 
 import React, { Fragment, type FC } from 'react'
 
+import { useRouter } from 'next/navigation'
 
-export const CreateDraftPage: FC = ({ }) => {
+export const CreateDraftPage: FC = ({}) => {
+	const router = useRouter()
 
 	const onSuccess = () => {
-		console.log('success')
+		router.push('/draft')
 	}
 
 	const { loading, mutate } = useCreateDraft({ onSuccess })
