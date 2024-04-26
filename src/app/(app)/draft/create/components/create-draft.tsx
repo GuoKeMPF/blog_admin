@@ -4,11 +4,16 @@ import { DraftForm } from '../../components'
 
 import { useCreateDraft } from '@/hooks'
 
+import { Button } from '@/components/ui'
+
+import Icons from '@/components/icons'
+
 import React, { Fragment, type FC } from 'react'
 
+import Link from "next/link";
 import { useRouter } from 'next/navigation'
 
-export const CreateDraftPage: FC = ({}) => {
+export const CreateDraftPage: FC = ({ }) => {
 	const router = useRouter()
 
 	const onSuccess = () => {
@@ -19,7 +24,17 @@ export const CreateDraftPage: FC = ({}) => {
 
 	return (
 		<Fragment>
-			<DraftForm loading={loading} onSubmit={mutate} />
+			<DraftForm
+				loading={loading}
+				onSubmit={mutate}
+				title='Create Draft'
+				actions={
+					<Button className='mt-0' asChild size={'sm'}>
+						<Link href='/draft'>
+							Back <Icons.Back />
+						</Link>
+					</Button>
+				} />
 		</Fragment>
 	)
 }

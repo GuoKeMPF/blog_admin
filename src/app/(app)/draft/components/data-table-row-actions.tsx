@@ -8,6 +8,7 @@ import {
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from '@/components/ui'
+import { useDeleteDraft } from '@/hooks'
 
 import Link from 'next/link'
 
@@ -15,18 +16,34 @@ import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 import { Row } from '@tanstack/react-table'
 
 interface DataTableRowActionsProps<TData> {
-	row: Row<TData>
+	row: Row<TData>,
+	reFetch?: () => void
 }
 
 export function DataTableRowActions<TData>({
 	row,
+	reFetch
 }: DataTableRowActionsProps<TData>) {
+
+	const { mutate: deleteDraft, loading } = useDeleteDraft({
+		onSuccess: () => {
+			reFetch?.()
+		}
+	})
+
+	const onDelete = (row: Row<TData>) => {
+		deleteDraft({
+			id: row.original.id,
+		})
+	}
+
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button
 					variant="ghost"
-					className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+					className="flex h-8 p-0 data-[state=open]:bg-muted"
 				>
 					<DotsHorizontalIcon className="h-4 w-4" />
 					<span className="sr-only">Open menu</span>
@@ -34,9 +51,18 @@ export function DataTableRowActions<TData>({
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end" className="w-[160px]">
 				<DropdownMenuItem asChild>
-					<Link href={`/draft/edit/${row.id}/`}>Edit</Link>
+					<Link href={`/draft/edit/${row.original.id}/`}>Edit</Link>
 				</DropdownMenuItem>
-				<DropdownMenuItem>Delete</DropdownMenuItem>
+				<DropdownMenuItem onSelect={() => onDelete(row)} asChild>
+					<Button
+						variant="ghost"
+						className="flex justify-between w-full"
+						disabled={loading}
+					>
+						Delete
+						<DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+					</Button>
+				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	)

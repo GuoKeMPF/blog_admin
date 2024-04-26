@@ -12,8 +12,6 @@ export const metadata: Metadata = {
 type DraftProps = {}
 
 export const Draft: FC<DraftProps> = ({ }) => {
-
-
   return (
     <Fragment>
       <Table />

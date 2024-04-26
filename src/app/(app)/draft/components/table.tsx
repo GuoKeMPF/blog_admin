@@ -1,12 +1,14 @@
 'use client'
 
-import { columns } from '.'
+import { getColumns } from '.'
 
 import { DataTable } from '@/components/data-table/data-table'
 import { useDrafts } from '@/hooks'
-import { RequestPaginationType } from '@/interface'
+import { RequestPaginationType, DraftType } from '@/interface'
 
 import { Button } from '@/components/ui'
+
+import Icons from '@/components/icons'
 
 import React, { Fragment, type FC, useState, useMemo } from 'react'
 import { PaginationState } from '@tanstack/react-table'
@@ -27,9 +29,15 @@ export const Table: FC = () => {
 
 	const { data, loading, isError, reFetch } = useDrafts({ params })
 
+
+	const columns = useMemo(() => {
+		return getColumns({ reFetch })
+	}, [reFetch])
+
+
 	return (
 		<Fragment>
-			<DataTable
+			<DataTable<DraftType, {}>
 				data={data?.data ?? []}
 				columns={columns}
 				total={data?.count ?? 0}
@@ -40,7 +48,7 @@ export const Table: FC = () => {
 					<Fragment>
 						<Button size="sm" asChild>
 							<Fragment>
-								<Link href={'/draft/create'}>Create Draft</Link>
+								<Link href={'/draft/create'}><Icons.Plus /> Create Draft</Link>
 							</Fragment>
 						</Button>
 					</Fragment>

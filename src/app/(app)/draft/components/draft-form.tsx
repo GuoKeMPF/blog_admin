@@ -23,7 +23,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import React, { Fragment, type FC } from 'react'
+import React, { Fragment, ReactNode, type FC } from 'react'
 
 const FormSchema = z.object({
 	title: z.string().min(1, {
@@ -46,6 +46,8 @@ const defaultValues: DraftParamsType = {
 type DraftFormProps = {
 	disabled?: boolean
 	loading?: boolean
+	title?: string
+	actions?: ReactNode
 	initValues?: DraftParamsType
 	onSubmit: (values: z.infer<typeof FormSchema>) => void
 }
@@ -53,6 +55,8 @@ type DraftFormProps = {
 export const DraftForm: FC<DraftFormProps> = ({
 	disabled = false,
 	loading = false,
+	title = '',
+	actions,
 	onSubmit: submit,
 	initValues = defaultValues,
 }) => {
@@ -71,8 +75,13 @@ export const DraftForm: FC<DraftFormProps> = ({
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)}>
 					<Card>
-						<CardHeader>
-							<h1 className="text-2xl">Create Draft</h1>
+						<CardHeader className='flex flex-row'>
+							<h1 className="text-2xl flex-1">{
+								title
+							}</h1>
+							{
+								actions
+							}
 						</CardHeader>
 						<CardContent>
 							<FormField
@@ -135,4 +144,3 @@ export const DraftForm: FC<DraftFormProps> = ({
 		</Fragment>
 	)
 }
-export default DraftForm

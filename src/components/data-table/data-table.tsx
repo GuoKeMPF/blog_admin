@@ -44,7 +44,8 @@ interface DataTableProps<TData, TValue> {
 	loading: boolean
 	onPaginationChange: OnChangeFn<PaginationState>,
 	pagination: PaginationState,
-	action?: React.ReactNode
+	action?: React.ReactNode,
+	reFetch?: () => void
 }
 
 export function DataTable<TData, TValue>({

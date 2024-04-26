@@ -9,6 +9,7 @@ import {
 	UseDraftReturnType,
 	DraftType,
 	EditDraftParamsType,
+	ID,
 } from '@/interface'
 import {
 	queryDrafts,
@@ -170,7 +171,7 @@ export const useEditDraft = ({
 	onFinally,
 }: BaseHookType = {}): UseEditDraftReturnType => {
 	const [loading, setLoading] = useState<boolean>(false)
-	const mutate = async (params: DraftParamsType) => {
+	const mutate = async (params: EditDraftParamsType) => {
 		setLoading(true)
 		try {
 			await updateDraft(params)
@@ -197,3 +198,44 @@ export const useEditDraft = ({
 		loading,
 	}
 }
+
+
+interface UseDeleteDraftReturnType {
+	loading: boolean
+	mutate: (data: { id: ID }) => Promise<void>
+}
+export const useDeleteDraft = ({
+	onSuccess,
+	onError,
+	onFinally,
+}: BaseHookType = {}): UseDeleteDraftReturnType => {
+	const [loading, setLoading] = useState<boolean>(false)
+	const mutate = async (params: { id: ID }) => {
+		setLoading(true)
+		try {
+			await deleteDraft(params)
+			toast({
+				title: '删除草稿成功',
+				description: '删除草稿成功',
+			})
+			onSuccess?.()
+		} catch (error: any) {
+			toast({
+				title: '删除草稿失败',
+				description: error.message,
+				variant: 'destructive',
+			})
+			onError?.(error as Error)
+		} finally {
+			onFinally?.()
+			setLoading(false)
+		}
+	}
+
+	return {
+		mutate,
+		loading,
+	}
+}
+
+

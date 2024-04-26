@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons";
 
-import * as React from "react"
+import React, { useMemo, Fragment } from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-import { useMemo } from "react";
+
 
 
 const buttonVariants = cva(
@@ -60,12 +60,21 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 				{/* 
 				span 作用是 当使用 asChild 时，需要一个实体 dom 合并样式
 				*/}
-				<span>
-					{loading && (
-						<Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
-					)}
-					{children}
-				</span>
+				{
+					asChild ? (
+						<span className={cn(buttonVariants({ variant, size, className }))}>
+							{loading && (
+								<Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
+							)}
+							{children}
+						</span>
+					) : <Fragment>
+						{loading && (
+							<Icons.Spinner className="mr-2 h-4 w-4 animate-spin" />
+						)}
+						{children}
+					</Fragment>
+				}
 			</Comp>
 		)
 	}
