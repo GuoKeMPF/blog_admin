@@ -4,7 +4,8 @@ import { draft } from './api';
 import type { DraftType, PaginationType, ID, RequestPaginationType, DraftParamsType, EditDraftParamsType } from '@/interface';
 
 export async function queryDrafts(params?: RequestPaginationType): Promise<PaginationType<DraftType>> {
-	return Get(`${draft}/`, { size: params?.size ?? 10, page: params?.page ?? 1, });
+	const { size = 10, page = 1, ...others } = params ?? {};
+	return Get(`${draft}/`, { size, page, ...others });
 }
 
 export async function queryDraft({ id }: { id: ID }): Promise<DraftType> {

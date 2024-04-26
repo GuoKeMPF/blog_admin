@@ -1,5 +1,5 @@
 import { toast } from '@/components/ui'
-import { sessionKeys, setSession } from '@/lib'
+import { localKeys, setLocal } from '@/lib'
 import { login } from '@/services'
 
 import { useState } from 'react'
@@ -26,9 +26,8 @@ export const useLogin = ({
 		setLoading(true)
 		try {
 			const res = await login(data)
-			console.log(res);
 			const { csrftoken, username } = res
-			setSession(sessionKeys.csrftoken, csrftoken)
+			setLocal(localKeys.csrftoken, csrftoken)
 			setLoading(false)
 			toast({
 				title: '登录成功',

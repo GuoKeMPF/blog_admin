@@ -47,7 +47,7 @@ export interface DraftType extends DraftParamsType {
 }
 
 export type Drafts = DraftType[]
-export interface DraftsResponseType extends PaginationType<DraftType> {}
+export interface DraftsResponseType extends PaginationType<DraftType> { }
 
 export type PictureType = {
 	id: string

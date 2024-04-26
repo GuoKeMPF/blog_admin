@@ -23,7 +23,7 @@ export const EditDraftPage: FC = ({ }) => {
 	const urlParams = useParams()
 
 	const onSuccess = () => {
-		router.push('/draft')
+		router.back()
 	}
 
 	const { data, isError, loading: loadingPreview } = useDraft({ params: urlParams })
@@ -50,10 +50,8 @@ export const EditDraftPage: FC = ({ }) => {
 				onSubmit={onSubmit}
 				title='Edit Draft'
 				actions={
-					<Button className='mt-0' asChild size={'sm'}>
-						<Link href='/draft'>
-							Back <Icons.Back />
-						</Link>
+					<Button className='mt-0' onClick={() => router.back()} size={'sm'}>
+						Back <Icons.Back />
 					</Button>}
 			/>
 		</Fragment>

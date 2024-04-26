@@ -10,14 +10,13 @@ import Icons from '@/components/icons'
 
 import React, { Fragment, type FC } from 'react'
 
-import Link from "next/link";
 import { useRouter } from 'next/navigation'
 
 export const CreateDraftPage: FC = ({ }) => {
 	const router = useRouter()
 
 	const onSuccess = () => {
-		router.push('/draft')
+		router.back()
 	}
 
 	const { loading, mutate } = useCreateDraft({ onSuccess })
@@ -29,10 +28,8 @@ export const CreateDraftPage: FC = ({ }) => {
 				onSubmit={mutate}
 				title='Create Draft'
 				actions={
-					<Button className='mt-0' asChild size={'sm'}>
-						<Link href='/draft'>
-							Back <Icons.Back />
-						</Link>
+					<Button className='mt-0' onClick={() => router.back()} size={'sm'}>
+						Back <Icons.Back />
 					</Button>
 				} />
 		</Fragment>

@@ -1,4 +1,4 @@
-import { API_URL, SSR_API_URL, getSession, sessionKeys, unAuthCodeSet } from "@/lib";
+import { API_URL, SSR_API_URL, getLocal, localKeys, unAuthCodeSet } from "@/lib";
 
 import axios, { AxiosRequestConfig } from "axios";
 import { redirect } from 'next/navigation'
@@ -19,7 +19,7 @@ export const errorHandler = (error: any) => {
 instance.interceptors.request.use(function (config) {
 	// 在发送请求之前做些什么
 	const { headers = {} }: { headers?: any } = config;
-	const csrftoken: string | undefined = getSession(sessionKeys.csrftoken);
+	const csrftoken: string | undefined = getLocal(localKeys.csrftoken);
 	if (csrftoken) {
 		headers['X-CSRFToken'] = csrftoken;
 	}

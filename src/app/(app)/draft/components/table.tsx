@@ -2,30 +2,23 @@
 
 import { getColumns } from '.'
 
-import { DataTable } from '@/components/data-table/data-table'
+import { DataTable } from '@/components/data-table'
 import { useDrafts } from '@/hooks'
-import { RequestPaginationType, DraftType } from '@/interface'
+import { DraftType } from '@/interface'
 
 import { Button } from '@/components/ui'
 
 import Icons from '@/components/icons'
+import { useLocationParams } from "@/hooks";
 
-import React, { Fragment, type FC, useState, useMemo } from 'react'
+
+import React, { Fragment, type FC, useState, useMemo, useCallback, useEffect } from 'react'
 import { PaginationState } from '@tanstack/react-table'
 import Link from 'next/link'
 
 export const Table: FC = () => {
-	const [pagination, setPagination] = useState<PaginationState>({
-		pageIndex: 0,
-		pageSize: 10,
-	})
 
-	const params = useMemo<RequestPaginationType>(() => {
-		return {
-			page: pagination.pageIndex + 1,
-			size: pagination.pageSize,
-		}
-	}, [pagination])
+	const { params, pagination, setPagination } = useLocationParams()
 
 	const { data, loading, isError, reFetch } = useDrafts({ params })
 

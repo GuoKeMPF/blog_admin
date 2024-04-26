@@ -87,7 +87,6 @@
 }
 
 body {
-  min-height: 100lvh;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to bottom,
       transparent,
