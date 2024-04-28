@@ -14,7 +14,7 @@ export interface PaginationType<T> {
 }
 
 export type AudioType = {
-	id: string
+	id: ID
 	src: string
 	create_time?: string
 	name: string
@@ -37,12 +37,12 @@ export interface DraftParamsType {
 }
 
 export interface EditDraftParamsType extends DraftParamsType {
-	id: string
+	id: ID
 }
 
 
 export interface DraftType extends DraftParamsType {
-	id: string
+	id: ID
 	views: number
 }
 
@@ -50,7 +50,7 @@ export type Drafts = DraftType[]
 export interface DraftsResponseType extends PaginationType<DraftType> { }
 
 export type PictureType = {
-	id: string
+	id: ID
 	src: string
 	create_time?: string
 	name: string
@@ -58,7 +58,7 @@ export type PictureType = {
 export type PictureTypes = PictureType[]
 
 export interface PostType {
-	id: string
+	id: ID
 	content: string
 	title: string
 	description: string
@@ -67,14 +67,31 @@ export interface PostType {
 	[key: string]: any
 }
 
-export type Post = {
-	id: string
+
+
+
+export interface PostParamsType {
 	content: string
 	title: string
 	description: string
+}
+
+export type Post = {
+	id: ID
+	content: string
+	title: string
+	description: string,
+	views: number,
 	[key: string]: any
 }
 export type Posts = PostType[]
+
+export interface EditPostParamsType extends PostParamsType {
+	id: ID
+}
+
+
+
 
 export interface LoginParamsType {
 	account: string

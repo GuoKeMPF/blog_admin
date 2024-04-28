@@ -1,24 +1,26 @@
 import { post } from './api';
 import { Delete, Get, Post, Put } from './request';
 
-import type { PostType, PaginationType } from '@/interface';
+import type { PostType, PaginationType, ID, PostParamsType, EditPostParamsType } from '@/interface';
 
 export async function queryPosts(params: any): Promise<PaginationType<PostType>> {
-  return Get(`${post}/`, { size: 12, page: 1, ...params });
+	const { size = 10, page = 1, ...others } = params ?? {};
+	return Get(`${post}/`, { size: 12, page: 1, ...params });
 }
 
-export async function queryPost({ id }: { id: string }): Promise<PostType> {
-  return Get(`${post}/${id}`);
+export async function queryPost({ id }: { id: ID }): Promise<PostType> {
+	return Get(`${post}/${id}`);
 }
 
-export async function addPost(data: PostType) {
-  return Post(`${post}/`, data);
+export async function createPost(data: PostParamsType) {
+	return Post(`${post}/`, data);
 }
 
-export async function updatePost(data: { id: string; data: PostType }) {
-  return Put(`${post}/${data.id}`, data);
+export async function updatePost(params: EditPostParamsType) {
+	const { id, ...data } = params
+	return Put(`${post}/${id}`, data);
 }
 
-export async function deletePost({ id }: { id: string }) {
-  return Delete(`${post}/${id}`);
+export async function deletePost({ id }: { id: ID }) {
+	return Delete(`${post}/${id}`);
 }

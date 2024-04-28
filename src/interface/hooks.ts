@@ -3,6 +3,7 @@ import {
 	DraftType,
 	ID,
 	PaginationType,
+	PostType,
 	RequestPaginationType,
 } from '.'
 
@@ -24,15 +25,15 @@ export interface UseDashboardType extends BaseHookType {
 	initValue?: DashboardResponseType
 }
 export interface UseDashboardReturnType
-	extends BaseHookReturnType<DashboardResponseType> {}
+	extends BaseHookReturnType<DashboardResponseType> { }
 
 export interface UseDraftsType extends BaseHookType {
 	params?: RequestPaginationType
 }
 
-export interface DraftHooksData extends PaginationType<DraftType> {}
+export interface DraftHooksData extends PaginationType<DraftType> { }
 export interface UseDraftsReturnType
-	extends BaseHookReturnType<DraftHooksData> {}
+	extends BaseHookReturnType<DraftHooksData> { }
 
 export interface UseDraftType extends BaseHookType {
 	params: {
@@ -41,4 +42,27 @@ export interface UseDraftType extends BaseHookType {
 }
 
 export interface UseDraftReturnType
-	extends BaseHookReturnType<DraftType | undefined> {}
+	extends BaseHookReturnType<DraftType | undefined> { }
+
+
+
+
+export interface UsePostsType extends BaseHookType {
+	params?: RequestPaginationType
+}
+
+export interface UsePostType extends BaseHookType {
+	params: {
+		id?: ID
+	}
+}
+
+export interface PostHooksData extends PaginationType<PostType> { }
+
+export interface UsePostsReturnType
+	extends BaseHookReturnType<PostHooksData> { }
+
+
+export interface UsePostReturnType
+	extends BaseHookReturnType<PostType | undefined> { }
+

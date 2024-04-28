@@ -8,7 +8,7 @@ import {
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from '@/components/ui'
-import { useDeleteDraft } from '@/hooks'
+import { useDeletePost } from '@/hooks'
 
 import Icons from '@/components/icons'
 
@@ -27,14 +27,14 @@ export function DataTableRowActions<TData>({
 	reFetch
 }: DataTableRowActionsProps<TData>) {
 
-	const { mutate: deleteDraft, loading } = useDeleteDraft({
+	const { mutate: deletePost, loading } = useDeletePost({
 		onSuccess: () => {
 			reFetch?.()
 		}
 	})
 
 	const onDelete = (row: Row<TData>) => {
-		deleteDraft({
+		deletePost({
 			id: row.original.id,
 		})
 	}
@@ -53,7 +53,7 @@ export function DataTableRowActions<TData>({
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end" className="w-[160px]">
 				<DropdownMenuItem asChild>
-					<Link href={`/draft/edit/${row.original.id}/`}>
+					<Link href={`/post/edit/${row.original.id}/`}>
 						<Icons.Pencil />
 						Edit
 					</Link>
