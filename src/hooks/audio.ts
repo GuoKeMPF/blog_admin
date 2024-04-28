@@ -1,20 +1,24 @@
-import { toast } from "@/components/ui"
-import { BaseHookType, BaseHookReturnType, AudioType, AudiosType, RequestPaginationType, PaginationType, DeleteAudioParamsType } from "@/interface"
-import { queryAudios } from "@/services"
+import { toast } from '@/components/ui'
+import {
+	BaseHookType,
+	BaseHookReturnType,
+	AudioType,
+	AudiosType,
+	RequestPaginationType,
+	PaginationType,
+	DeleteAudioParamsType,
+} from '@/interface'
+import { queryAudios } from '@/services'
 
-import { useEffect, useState } from "react"
-
-
+import { useEffect, useState } from 'react'
 
 export interface UseAudiosType extends BaseHookType {
 	params?: RequestPaginationType
 }
 
+interface AudiosHooksData extends PaginationType<AudioType> {}
 
-interface AudiosHooksData extends PaginationType<AudiosType> { }
-
-interface UseAudiosReturnType
-	extends BaseHookReturnType<AudiosHooksData> { }
+interface UseAudiosReturnType extends BaseHookReturnType<AudiosHooksData> {}
 
 export const useAudios = ({
 	onSuccess,
@@ -22,7 +26,6 @@ export const useAudios = ({
 	onFinally,
 	params,
 }: UseAudiosType = {}): UseAudiosReturnType => {
-
 	const [data, setData] = useState<AudiosHooksData>({
 		count: 0,
 		data: [],
@@ -69,8 +72,6 @@ export const useAudios = ({
 	}
 }
 
-
-
 interface UseDeleteAudioReturnType {
 	loading: boolean
 	mutate: (data: DeleteAudioParamsType) => Promise<void>
@@ -82,7 +83,7 @@ export const useDeleteAudio = ({
 }: BaseHookType = {}): UseDeleteAudioReturnType => {
 	const [loading, setLoading] = useState<boolean>(false)
 
-	const mutate = async (data: DeleteAudioParamsType) => { }
+	const mutate = async (data: DeleteAudioParamsType) => {}
 
 	return {
 		loading,
