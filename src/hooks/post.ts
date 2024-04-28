@@ -1,15 +1,14 @@
 import { toast } from '@/components/ui'
 import {
-	UsePostsType,
-	UsePostsReturnType,
-	PostHooksData,
 	BaseHookType,
 	PostParamsType,
-	UsePostType,
-	UsePostReturnType,
 	PostType,
 	EditPostParamsType,
 	ID,
+	RequestPaginationType,
+	PaginationType,
+	BaseHookReturnType,
+	DeleteDraftParamsType,
 } from '@/interface'
 import {
 	queryPosts,
@@ -21,13 +20,24 @@ import {
 
 import { useState, useEffect } from 'react'
 
+
+
+export interface UsePostsType extends BaseHookType {
+	params?: RequestPaginationType
+}
+
+export interface PostsHooksData extends PaginationType<PostType> { }
+
+export interface UsePostsReturnType
+	extends BaseHookReturnType<PostsHooksData> { }
+
 export const usePosts = ({
 	onSuccess,
 	onError,
 	onFinally,
 	params,
 }: UsePostsType = {}): UsePostsReturnType => {
-	const [data, setData] = useState<PostHooksData>({
+	const [data, setData] = useState<PostsHooksData>({
 		count: 0,
 		data: [],
 		page: params?.page ?? 1,
@@ -74,6 +84,16 @@ export const usePosts = ({
 		reFetch,
 	}
 }
+
+
+
+export interface UsePostType extends BaseHookType {
+	params: {
+		id?: ID
+	}
+}
+export interface UsePostReturnType
+	extends BaseHookReturnType<PostType | undefined> { }
 
 export const usePost = ({
 	onSuccess,
@@ -204,7 +224,7 @@ export const useEditPost = ({
 
 interface UseDeletePostReturnType {
 	loading: boolean
-	mutate: (data: { id: ID }) => Promise<void>
+	mutate: (data: DeleteDraftParamsType) => Promise<void>
 }
 export const useDeletePost = ({
 	onSuccess,
@@ -212,7 +232,7 @@ export const useDeletePost = ({
 	onFinally,
 }: BaseHookType = {}): UseDeletePostReturnType => {
 	const [loading, setLoading] = useState<boolean>(false)
-	const mutate = async (params: { id: ID }) => {
+	const mutate = async (params: DeleteDraftParamsType) => {
 		setLoading(true)
 		try {
 			await deletePost(params)

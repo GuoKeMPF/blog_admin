@@ -11,9 +11,7 @@ import { Button } from '@/components/ui'
 import Icons from '@/components/icons'
 import { useLocationParams } from "@/hooks";
 
-
-import React, { Fragment, type FC, useState, useMemo, useCallback, useEffect } from 'react'
-import { PaginationState } from '@tanstack/react-table'
+import React, { Fragment, type FC, useMemo } from 'react'
 import Link from 'next/link'
 
 export const Table: FC = () => {

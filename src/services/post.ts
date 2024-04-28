@@ -1,7 +1,7 @@
 import { post } from './api';
 import { Delete, Get, Post, Put } from './request';
 
-import type { PostType, PaginationType, ID, PostParamsType, EditPostParamsType } from '@/interface';
+import type { PostType, PaginationType, ID, PostParamsType, EditPostParamsType, DeletePostParamsType } from '@/interface';
 
 export async function queryPosts(params: any): Promise<PaginationType<PostType>> {
 	const { size = 10, page = 1, ...others } = params ?? {};
@@ -21,6 +21,6 @@ export async function updatePost(params: EditPostParamsType) {
 	return Put(`${post}/${id}`, data);
 }
 
-export async function deletePost({ id }: { id: ID }) {
+export async function deletePost({ id }: DeletePostParamsType) {
 	return Delete(`${post}/${id}`);
 }

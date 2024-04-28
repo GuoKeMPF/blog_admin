@@ -1,7 +1,7 @@
 import { Get, Post, Put, Delete } from './request';
 import { draft } from './api';
 
-import type { DraftType, PaginationType, ID, RequestPaginationType, DraftParamsType, EditDraftParamsType } from '@/interface';
+import type { DraftType, PaginationType, ID, RequestPaginationType, DraftParamsType, EditDraftParamsType, DeleteDraftParamsType } from '@/interface';
 
 export async function queryDrafts(params?: RequestPaginationType): Promise<PaginationType<DraftType>> {
 	const { size = 10, page = 1, ...others } = params ?? {};
@@ -21,6 +21,6 @@ export async function updateDraft(params: EditDraftParamsType) {
 	return Put(`${draft}/${id}/`, data);
 }
 
-export async function deleteDraft({ id }: { id: ID }) {
+export async function deleteDraft({ id }: DeleteDraftParamsType) {
 	return Delete(`${draft}/${id}/`);
 }

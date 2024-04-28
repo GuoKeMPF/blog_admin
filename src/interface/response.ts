@@ -6,6 +6,18 @@ export interface RequestPaginationType {
 	size?: number
 }
 
+
+export interface LoginParamsType {
+	account: string
+	password: string
+}
+
+export interface LoginResponseType {
+	csrftoken: string
+	username: string
+}
+
+
 export interface PaginationType<T> {
 	data: T[]
 	count: PaginationTotalType
@@ -13,15 +25,6 @@ export interface PaginationType<T> {
 	page: number
 }
 
-export type AudioType = {
-	id: ID
-	src: string
-	create_time?: string
-	name: string
-	description: string
-	unique_name: string
-}
-export type AudiosType = AudioType[]
 
 export interface DashboardResponseType {
 	draft: number
@@ -40,6 +43,9 @@ export interface EditDraftParamsType extends DraftParamsType {
 	id: ID
 }
 
+export interface DeleteDraftParamsType {
+	id: ID
+}
 
 export interface DraftType extends DraftParamsType {
 	id: ID
@@ -90,15 +96,31 @@ export interface EditPostParamsType extends PostParamsType {
 	id: ID
 }
 
-
-
-
-export interface LoginParamsType {
-	account: string
-	password: string
+export interface DeletePostParamsType {
+	id: ID
 }
 
-export interface LoginResponseType {
-	csrftoken: string
-	username: string
+
+export type AudioType = {
+	id: ID
+	src: string
+	create_time?: string
+	name: string
+	description: string
+	unique_name: string
+}
+export type AudiosType = AudioType[]
+
+export interface AudioParamsType {
+	src: string
+	name: string
+	description: string
+}
+
+export interface EditAudioParamsType extends AudioParamsType {
+	id: ID
+}
+
+export interface DeleteAudioParamsType {
+	id: ID
 }
