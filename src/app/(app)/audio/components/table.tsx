@@ -1,10 +1,9 @@
 'use client'
 
-import { getColumns } from '.'
+import { getColumns, UploadAudio } from '.'
 
 import { DataTable } from '@/components/data-table'
 import { useAudios } from '@/hooks'
-import { AudioType } from '@/interface'
 
 import { Button } from '@/components/ui'
 
@@ -15,7 +14,7 @@ import React, { Fragment, type FC, useMemo } from 'react'
 
 type TableProps = {}
 
-export const Table: FC<TableProps> = ({}) => {
+export const Table: FC<TableProps> = ({ }) => {
 	const { params, pagination, setPagination } = useLocationParams()
 
 	const { data, loading, isError, reFetch } = useAudios({ params })
@@ -43,6 +42,7 @@ export const Table: FC<TableProps> = ({}) => {
 						>
 							<Icons.Reload /> Refresh
 						</Button>
+						<UploadAudio />
 					</Fragment>
 				}
 			/>

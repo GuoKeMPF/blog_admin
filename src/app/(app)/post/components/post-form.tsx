@@ -1,7 +1,7 @@
 'use client'
 
 import { PostParamsType } from '@/interface'
-import { Editor } from '@/components/editor'
+import { Editor } from '@/components/form-filed'
 
 import {
 	Card,

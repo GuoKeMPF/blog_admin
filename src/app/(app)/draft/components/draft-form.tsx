@@ -1,7 +1,7 @@
 'use client'
 
 import { DraftParamsType } from '@/interface'
-import { Editor } from '@/components/editor'
+import { Editor } from '@/components/form-filed'
 
 import {
 	Card,
@@ -49,7 +49,7 @@ type DraftFormProps = {
 	title?: string
 	actions?: ReactNode
 	initValues?: DraftParamsType
-	onSubmit: (values: z.infer<typeof FormSchema>) => void
+	onSubmit: (values: DraftParamsType) => void
 }
 
 export const DraftForm: FC<DraftFormProps> = ({
