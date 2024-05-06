@@ -10,6 +10,8 @@ export * from './dropdown-menu'
 export * from './form'
 export * from './input'
 export * from './label'
+
+export * from './slider'
 export * from './skeleton'
 export * from './select'
 export * from './table'

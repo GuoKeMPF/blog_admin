@@ -1,6 +1,6 @@
 'use client'
 
-import { getColumns, UploadAudio } from '.'
+import { getColumns, UploadAudio, Player } from '.'
 
 import { DataTable } from '@/components/data-table'
 import { useAudios } from '@/hooks'
@@ -10,21 +10,42 @@ import { Button } from '@/components/ui'
 import Icons from '@/components/icons'
 import { useLocationParams } from '@/hooks'
 
-import React, { Fragment, type FC, useMemo } from 'react'
+import { AudioType } from '@/interface'
+
+import React, { Fragment, type FC, useMemo, useState } from 'react'
 
 type TableProps = {}
 
-export const Table: FC<TableProps> = ({ }) => {
+export const Table: FC<TableProps> = ({}) => {
 	const { params, pagination, setPagination } = useLocationParams()
 
+	const [audio, setAudio] = useState<AudioType>()
 	const { data, loading, isError, reFetch } = useAudios({ params })
 
 	const columns = useMemo(() => {
 		return getColumns({ reFetch })
 	}, [reFetch])
 
+	const onReset = () => {
+		setAudio(undefined)
+	}
+
+	const onSwitch = (step: 1 | -1) => {
+		const audios = data?.data ?? []
+		const index = audios.findIndex((a) => audio?.id === a.id)
+		let nextIndex = index + step
+		if (nextIndex >= audios.length) {
+			nextIndex = 0
+		}
+		if (nextIndex < 0) {
+			nextIndex = audios.length - 1
+		}
+		const nextAudio = audios[nextIndex]
+		setAudio(nextAudio)
+	}
+
 	return (
-		<Fragment>
+		<div className="flex flex-col gap-4">
 			<DataTable
 				data={data?.data ?? []}
 				columns={columns}
@@ -46,7 +67,13 @@ export const Table: FC<TableProps> = ({ }) => {
 					</Fragment>
 				}
 			/>
-		</Fragment>
+			<Player
+				onReset={onReset}
+				onSwitch={onSwitch}
+				src={audio?.src}
+				name={audio?.name}
+			/>
+		</div>
 	)
 }
 export default Table
