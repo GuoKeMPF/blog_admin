@@ -1,6 +1,6 @@
 export interface BaseHookType {
 	onSuccess?: () => void
-	onError?: (error: Error) => void
+	onError?: (error: Error | unknown) => void
 	onFinally?: () => void
 }
 

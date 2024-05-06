@@ -1,3 +1,5 @@
+"use client"
+
 import { UploadAudioForm } from "./";
 
 import {
@@ -11,22 +13,37 @@ import {
 
 import { Icons } from "@/components/icons";
 
+import { useCreateAudio } from "@/hooks";
+
+import { AudioParamsType } from "@/interface";
+
 import React, { Fragment, type FC } from "react";
 
-type UploadAudioProps = {
 
+type UploadAudioProps = {
+	reFetch: () => void
 };
 
-export const UploadAudio: FC<UploadAudioProps> = ({ }) => {
+export const UploadAudio: FC<UploadAudioProps> = ({ reFetch }) => {
 
 	const [open, setOpen] = React.useState(false);
 
-	const onSubmit = async (data: any) => {
-		console.log(data);
+	const onSuccess = () => {
+		setOpen(false)
+		reFetch()
+	}
 
-		setTimeout(() => {
-			setOpen(false)
-		}, 5000);
+
+
+	const { mutate, loading } = useCreateAudio({ onSuccess });
+
+
+
+	const onSubmit = (data: AudioParamsType) => {
+
+		console.log("data", data);
+
+		mutate(data)
 	}
 	return <Fragment>
 
@@ -40,9 +57,8 @@ export const UploadAudio: FC<UploadAudioProps> = ({ }) => {
 				<DialogHeader>
 					<DialogTitle>Create Audio</DialogTitle>
 				</DialogHeader>
-				<UploadAudioForm onSubmit={onSubmit} />
+				<UploadAudioForm loading={loading} onSubmit={onSubmit} />
 			</DialogContent>
 		</Dialog>
 	</Fragment>;
 };
-export default UploadAudio

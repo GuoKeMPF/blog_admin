@@ -7,8 +7,9 @@ import {
 	RequestPaginationType,
 	PaginationType,
 	DeleteAudioParamsType,
+	AudioParamsType,
 } from '@/interface'
-import { queryAudios } from '@/services'
+import { createAudios, queryAudios, deleteAudio } from '@/services'
 
 import { useEffect, useState } from 'react'
 
@@ -16,9 +17,9 @@ export interface UseAudiosType extends BaseHookType {
 	params?: RequestPaginationType
 }
 
-interface AudiosHooksData extends PaginationType<AudioType> {}
+interface AudiosHooksData extends PaginationType<AudioType> { }
 
-interface UseAudiosReturnType extends BaseHookReturnType<AudiosHooksData> {}
+interface UseAudiosReturnType extends BaseHookReturnType<AudiosHooksData> { }
 
 export const useAudios = ({
 	onSuccess,
@@ -72,6 +73,47 @@ export const useAudios = ({
 	}
 }
 
+
+interface UseCreateDraftReturnType {
+	loading: boolean
+	mutate: (data: AudioParamsType) => Promise<void>
+}
+export const useCreateAudio = ({
+	onSuccess,
+	onError,
+	onFinally,
+}: BaseHookType = {}): UseCreateDraftReturnType => {
+	const [loading, setLoading] = useState<boolean>(false)
+
+	const mutate = async (data: AudioParamsType) => {
+		setLoading(true)
+		try {
+			const params = new FormData();
+			const { description, file = [] } = data;
+			params.append('description', description);
+			file.forEach((f) => {
+				params.append('file', f);
+			});
+			await createAudios(params)
+			onSuccess?.()
+		} catch (error) {
+			console.log(error);
+			onError?.(error as any)
+		} finally {
+			setLoading(false)
+			onFinally?.()
+		}
+	}
+
+	return {
+		loading,
+		mutate,
+	}
+}
+
+
+
+
 interface UseDeleteAudioReturnType {
 	loading: boolean
 	mutate: (data: DeleteAudioParamsType) => Promise<void>
@@ -83,7 +125,17 @@ export const useDeleteAudio = ({
 }: BaseHookType = {}): UseDeleteAudioReturnType => {
 	const [loading, setLoading] = useState<boolean>(false)
 
-	const mutate = async (data: DeleteAudioParamsType) => {}
+	const mutate = async (data: DeleteAudioParamsType) => {
+		try {
+			await deleteAudio(data)
+			onSuccess?.()
+		} catch (error) {
+			onError?.(error)
+		} finally {
+			setLoading(false)
+			onFinally?.()
+		}
+	}
 
 	return {
 		loading,

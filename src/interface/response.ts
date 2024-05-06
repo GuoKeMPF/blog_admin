@@ -112,9 +112,8 @@ export type AudioType = {
 export type AudiosType = AudioType[]
 
 export interface AudioParamsType {
-	src: string
-	name: string
 	description: string
+	file?: readonly string[]
 }
 
 export interface EditAudioParamsType extends AudioParamsType {

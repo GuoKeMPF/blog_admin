@@ -26,28 +26,21 @@ import { z } from 'zod'
 import React, { Fragment, ReactNode, type FC } from 'react'
 
 const FormSchema = z.object({
-	name: z.string().min(1, {
-		message: 'Name is required',
-	}),
 	description: z.string().min(1, {
 		message: 'Description is required',
 	}),
-	src: z.string().min(1, {
-		message: 'File src is required',
-	}),
+	file: z.any().optional(),
 })
 
 const defaultValues: AudioParamsType = {
-	name: '',
 	description: '',
-	src: '',
+	file: [],
 }
 
 
 type UploadAudioFormProps = {
 	disabled?: boolean
 	loading?: boolean
-	title?: string
 	actions?: ReactNode
 	initValues?: AudioParamsType
 	onSubmit: (values: AudioParamsType) => void
@@ -55,7 +48,6 @@ type UploadAudioFormProps = {
 
 export const UploadAudioForm: FC<UploadAudioFormProps> = ({
 	onSubmit: submit,
-	title,
 	initValues = defaultValues, disabled = false,
 	loading = false, }) => {
 	const form = useForm<AudioParamsType>({
@@ -74,18 +66,17 @@ export const UploadAudioForm: FC<UploadAudioFormProps> = ({
 
 		<Form {...form}>
 			<form onSubmit={form.handleSubmit(onSubmit)}>
-
 				<FormField
 					control={form.control}
-					name="name"
+					name="file"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Title</FormLabel>
+							<FormLabel>Audios</FormLabel>
 							<FormControl>
-								<Input placeholder="title" {...field} />
+								<UploadDrag placeholder="Upload your audio files" multiple {...field} />
 							</FormControl>
 							<FormDescription>
-								This is title for your draft.
+								This is audio files.
 							</FormDescription>
 							<FormMessage />
 						</FormItem>
@@ -107,22 +98,6 @@ export const UploadAudioForm: FC<UploadAudioFormProps> = ({
 						</FormItem>
 					)}
 				/>
-				<FormField
-					control={form.control}
-					name="src"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Content</FormLabel>
-							<FormControl>
-								<UploadDrag placeholder="Upload your audio files" {...field} />
-							</FormControl>
-							<FormDescription>
-								This is content for your draft.
-							</FormDescription>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
 				<Button loading={loading} disabled={disabled} type="submit">
 					Submit
 				</Button>
@@ -130,7 +105,6 @@ export const UploadAudioForm: FC<UploadAudioFormProps> = ({
 		</Form>
 	</Fragment>;
 };
-export default UploadAudioForm
 
 
 

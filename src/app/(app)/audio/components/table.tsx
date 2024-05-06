@@ -42,7 +42,7 @@ export const Table: FC<TableProps> = ({ }) => {
 						>
 							<Icons.Reload /> Refresh
 						</Button>
-						<UploadAudio />
+						<UploadAudio reFetch={reFetch} />
 					</Fragment>
 				}
 			/>

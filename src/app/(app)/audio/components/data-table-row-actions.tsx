@@ -49,15 +49,15 @@ export function DataTableRowActions<TData>({
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end" className="w-[160px]">
-				<DropdownMenuItem>
+				{/* <DropdownMenuItem>
 					<Icons.Pencil />
 					Edit
-				</DropdownMenuItem>
+				</DropdownMenuItem> */}
 				<DropdownMenuItem onSelect={() => onDelete()} asChild>
 					<Button
 						variant="ghost"
 						className="flex justify-between w-full"
-						disabled={loading}
+						loading={loading}
 					>
 						<Icons.Trash />
 						Delete
