@@ -33,8 +33,6 @@ export function DataTableRowActions<TData>({
 	})
 
 	const onDelete = () => {
-		console.log(row)
-
 		deleteAudio({
 			id: row.id,
 		})

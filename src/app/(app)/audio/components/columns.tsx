@@ -116,6 +116,9 @@ export const getColumns = ({ reFetch }: GetColumns): ColumnDef<AudioType>[] => {
 		},
 		{
 			id: 'actions',
+			header: ({ column }) => (
+				<DataTableColumnHeader column={column} title="Actions" />
+			),
 			cell: ({ row }) => (
 				<DataTableRowActions row={row.original} reFetch={reFetch} />
 			),

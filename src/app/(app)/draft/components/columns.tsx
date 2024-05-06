@@ -1,28 +1,22 @@
-"use client"
+'use client'
 
-import { DataTableRowActions } from "./data-table-row-actions";
+import { DataTableRowActions } from './data-table-row-actions'
 
-import { DraftType } from "@/interface"
+import { DraftType } from '@/interface'
 
-import { DataTableColumnHeader } from "@/components/data-table"
+import { DataTableColumnHeader } from '@/components/data-table'
 
-import { Checkbox, Label } from "@/components/ui"
+import { Checkbox, Label } from '@/components/ui'
 
 import { ColumnDef, Table } from '@tanstack/react-table'
 
-import { Fragment, useId } from "react";
-
-
-
+import { Fragment, useId } from 'react'
 
 interface HeaderSelectProps<TData> {
 	table: Table<TData>
 }
 
-function HeaderSelect<TData>({
-	table,
-}: HeaderSelectProps<TData>) {
-
+function HeaderSelect<TData>({ table }: HeaderSelectProps<TData>) {
 	const id = useId()
 
 	return (
@@ -30,18 +24,19 @@ function HeaderSelect<TData>({
 			<Checkbox
 				checked={
 					table.getIsAllPageRowsSelected() ||
-					(table.getIsSomePageRowsSelected() && "indeterminate")
+					(table.getIsSomePageRowsSelected() && 'indeterminate')
 				}
 				id={id}
 				onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
 				aria-label="Select all"
 				className="translate-y-[2px]"
 			/>
-			<Label htmlFor={id} className="ml-1">Select all</Label>
+			<Label htmlFor={id} className="ml-1">
+				Select all
+			</Label>
 		</Fragment>
 	)
 }
-
 
 type GetColumns = {
 	reFetch: () => void
@@ -50,11 +45,9 @@ type GetColumns = {
 export const getColumns = ({ reFetch }: GetColumns): ColumnDef<DraftType>[] => {
 	return [
 		{
-			id: "select",
+			id: 'select',
 			header: ({ table }) => {
-				return (
-					<HeaderSelect table={table} />
-				)
+				return <HeaderSelect table={table} />
 			},
 			cell: ({ row }) => (
 				<Checkbox
@@ -77,23 +70,22 @@ export const getColumns = ({ reFetch }: GetColumns): ColumnDef<DraftType>[] => {
 		//   enableHiding: false,
 		// },
 		{
-			accessorKey: "title",
+			accessorKey: 'title',
 			header: ({ column }) => (
 				<DataTableColumnHeader column={column} title="Title" />
 			),
 			cell: ({ row }) => {
-
 				return (
 					<div className="flex space-x-2">
 						<span className="max-w-[500px] truncate font-medium">
-							{row.getValue("title")}
+							{row.getValue('title')}
 						</span>
 					</div>
 				)
 			},
 		},
 		{
-			accessorKey: "description",
+			accessorKey: 'description',
 			header: ({ column }) => (
 				<DataTableColumnHeader column={column} title="Description" />
 			),
@@ -101,14 +93,20 @@ export const getColumns = ({ reFetch }: GetColumns): ColumnDef<DraftType>[] => {
 				return (
 					<div className="flex space-x-2">
 						<span className="max-w-[500px] truncate font-medium">
-							{row.getValue("description")}
+							{row.getValue('description')}
 						</span>
 					</div>
 				)
 			},
 		},
 		{
-			id: "actions",
-			cell: ({ row }) => <DataTableRowActions<DraftType> row={row} reFetch={reFetch} />,
-		}]
+			id: 'actions',
+			header: ({ column }) => (
+				<DataTableColumnHeader column={column} title="Actions" />
+			),
+			cell: ({ row }) => (
+				<DataTableRowActions<DraftType> row={row} reFetch={reFetch} />
+			),
+		},
+	]
 }

@@ -48,7 +48,6 @@ export const useDrafts = ({
 
 		try {
 			const response = await queryDrafts(params)
-			console.log('fetchData', params);
 			setData(response)
 			onSuccess && onSuccess()
 		} catch (error: any) {

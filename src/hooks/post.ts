@@ -51,7 +51,6 @@ export const usePosts = ({
 
 		try {
 			const response = await queryPosts(params)
-			console.log('fetchData', params);
 			setData(response)
 			onSuccess && onSuccess()
 		} catch (error: any) {

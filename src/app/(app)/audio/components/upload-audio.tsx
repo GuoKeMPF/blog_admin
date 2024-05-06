@@ -40,9 +40,6 @@ export const UploadAudio: FC<UploadAudioProps> = ({ reFetch }) => {
 
 
 	const onSubmit = (data: AudioParamsType) => {
-
-		console.log("data", data);
-
 		mutate(data)
 	}
 	return <Fragment>
