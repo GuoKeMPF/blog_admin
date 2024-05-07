@@ -2,17 +2,18 @@ import { picture } from './api';
 import { Upload } from './request';
 
 export const uploadImage = async (
-  blobInfo: { blob: () => any },
-  succFun: (arg0: any) => void,
-  failFun: (arg0: string) => void,
-) => {
-  const file = blobInfo.blob(); // 转化为易于理解的file对象
-  const formData = new FormData();
-  formData.append('file', file);
-  const res = await Upload(`${picture}/`, formData);
-  if (!res) {
-    failFun(`Invalid JSON: ${res}`);
-    return;
-  }
-  succFun(res.data.src);
+	blobInfo: { blob: () => any },
+): Promise<string> => {
+	const file = blobInfo.blob(); // 转化为易于理解的file对象
+	const formData = new FormData();
+	formData.append('file', file);
+	const res = await Upload(`${picture}/`, formData);
+	const promise: Promise<string> = new Promise((resolve, reject) => {
+		if (!res) {
+			reject(`Invalid JSON: ${res}`);
+			return;
+		}
+		resolve(res.data.src);
+	});
+	return promise
 };

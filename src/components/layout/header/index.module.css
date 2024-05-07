@@ -1,0 +1,17 @@
+.navHeader {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	grid-template-areas: 'logo title actions';
+}
+
+.logo {
+	grid-area: logo;
+}
+
+.title {
+	grid-area: title;
+}
+
+.actions {
+	grid-area: actions;
+}

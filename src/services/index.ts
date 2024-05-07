@@ -7,3 +7,6 @@ export * from "./post"
 export * from "./request"
 export * from "./upload"
 export * from "./user"
+
+export * from "./getSSRHeaders"
+
