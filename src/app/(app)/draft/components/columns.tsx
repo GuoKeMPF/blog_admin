@@ -104,9 +104,7 @@ export const getColumns = ({ reFetch }: GetColumns): ColumnDef<DraftType>[] => {
 			header: ({ column }) => (
 				<DataTableColumnHeader column={column} title="Actions" />
 			),
-			cell: ({ row }) => (
-				<DataTableRowActions<DraftType> row={row} reFetch={reFetch} />
-			),
+			cell: ({ row }) => <DataTableRowActions row={row} reFetch={reFetch} />,
 		},
 	]
 }

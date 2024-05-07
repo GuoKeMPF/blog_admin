@@ -9,7 +9,7 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui'
 import { useDeleteDraft } from '@/hooks'
-
+import { DraftType } from '@/interface'
 import Icons from '@/components/icons'
 
 import Link from 'next/link'
@@ -22,17 +22,17 @@ interface DataTableRowActionsProps<TData> {
 	reFetch?: () => void
 }
 
-export function DataTableRowActions<TData>({
+export function DataTableRowActions({
 	row,
 	reFetch,
-}: DataTableRowActionsProps<TData>) {
+}: DataTableRowActionsProps<DraftType>) {
 	const { mutate: deleteDraft, loading } = useDeleteDraft({
 		onSuccess: () => {
 			reFetch?.()
 		},
 	})
 
-	const onDelete = (row: Row<TData>) => {
+	const onDelete = (row: Row<DraftType>) => {
 		deleteDraft({
 			id: row.original.id,
 		})

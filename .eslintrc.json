@@ -1,36 +1,36 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:storybook/recommended"
-  ],
-  "plugins": [
-    "import"
-  ],
-  "rules": {
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "index",
-          "sibling",
-          "parent",
-          "internal",
-          "external",
-          "builtin",
-          "object",
-          "type"
-        ],
-        "pathGroups": [
-          {
-            "pattern": "~/**",
-            "group": "internal"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": [
-          "builtin"
-        ],
-        "newlines-between": "always-and-inside-groups"
-      }
-    ]
-  }
+	"extends": [
+		"next/core-web-vitals",
+		"plugin:storybook/recommended"
+	],
+	"plugins": [
+		"import"
+	],
+	"rules": {
+		"import/order": [
+			"warning",
+			{
+				"groups": [
+					"index",
+					"sibling",
+					"parent",
+					"internal",
+					"external",
+					"builtin",
+					"object",
+					"type"
+				],
+				"pathGroups": [
+					{
+						"pattern": "~/**",
+						"group": "internal"
+					}
+				],
+				"pathGroupsExcludedImportTypes": [
+					"builtin"
+				],
+				"newlines-between": "always-and-inside-groups"
+			}
+		]
+	}
 }

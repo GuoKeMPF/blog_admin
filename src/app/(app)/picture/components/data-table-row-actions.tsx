@@ -10,9 +10,8 @@ import {
 } from '@/components/ui'
 import { useDeletePicture } from '@/hooks'
 
-import Icons from '@/components/icons'
-
 import { PictureType } from '@/interface'
+import Icons from '@/components/icons'
 
 import { DotsHorizontalIcon } from '@radix-ui/react-icons'
 
@@ -21,7 +20,7 @@ interface DataTableRowActionsProps<TData> {
 	reFetch?: () => void
 }
 
-export function DataTableRowActions<TData>({
+export function DataTableRowActions({
 	row,
 	reFetch,
 }: DataTableRowActionsProps<PictureType>) {

@@ -119,9 +119,7 @@ export const getColumns = ({ reFetch }: GetColumns): ColumnDef<PostType>[] => {
 			header: ({ column }) => (
 				<DataTableColumnHeader column={column} title="Actions" />
 			),
-			cell: ({ row }) => (
-				<DataTableRowActions<PostType> row={row} reFetch={reFetch} />
-			),
+			cell: ({ row }) => <DataTableRowActions row={row} reFetch={reFetch} />,
 		},
 	]
 }
