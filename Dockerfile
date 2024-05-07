@@ -5,6 +5,19 @@ FROM base AS builder
 
 WORKDIR /app
 
+
+
+
+COPY .env .env
+COPY src ./src
+COPY public ./public
+COPY .storybook ./.storybook
+COPY packages ./packages
+COPY postcss.config.mjs .
+COPY next.config.mjs .
+COPY tailwind.config.ts .
+COPY tsconfig.json .
+
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 # Omit --production flag for TypeScript devDependencies
@@ -17,15 +30,6 @@ RUN \
   fi
 
 
-	COPY .env .env
-	COPY src ./src
-	COPY public ./public
-	COPY .storybook ./.storybook
-	COPY packages ./packages
-	COPY postcss.config.mjs .
-	COPY next.config.mjs .
-	COPY tailwind.config.ts .
-	COPY tsconfig.json .
 
 # Environment variables must be present at build time
 # https://github.com/vercel/next.js/discussions/14030
