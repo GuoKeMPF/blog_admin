@@ -12,11 +12,11 @@ import { useLocationParams } from '@/hooks'
 
 import { AudioType } from '@/interface'
 
-import React, { Fragment, type FC, useMemo, useState } from 'react'
+import React, { Fragment, type FC, useMemo, useState, useEffect } from 'react'
 
 type TableProps = {}
 
-export const Table: FC<TableProps> = ({}) => {
+export const Table: FC<TableProps> = ({ }) => {
 	const { params, pagination, setPagination } = useLocationParams()
 
 	const [audio, setAudio] = useState<AudioType>()
@@ -25,6 +25,10 @@ export const Table: FC<TableProps> = ({}) => {
 	const columns = useMemo(() => {
 		return getColumns({ reFetch })
 	}, [reFetch])
+
+	useEffect(() => {
+		setAudio(data?.data[0])
+	}, [data])
 
 	const onReset = () => {
 		setAudio(undefined)

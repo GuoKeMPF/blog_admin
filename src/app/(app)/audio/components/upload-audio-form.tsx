@@ -73,7 +73,8 @@ export const UploadAudioForm: FC<UploadAudioFormProps> = ({
 						<FormItem>
 							<FormLabel>Audios</FormLabel>
 							<FormControl>
-								<UploadDrag placeholder="Upload your audio files" multiple {...field} />
+								<UploadDrag placeholder="Upload your audio files"
+									accept="audio/*" multiple {...field} />
 							</FormControl>
 							<FormDescription>
 								This is audio files.

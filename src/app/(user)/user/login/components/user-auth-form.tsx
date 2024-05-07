@@ -1,7 +1,7 @@
 "use client"
 import { cn } from "@/lib/utils"
 import { Button, FormDescription, Input, Form, FormField, FormLabel, FormMessage, FormItem, FormControl } from "@/components/ui";
-import { useLogin } from "@/hooks";
+import { useUserInfo } from "@/hooks";
 import { encrypt } from "@/lib"
 
 import { useToast } from "@/components/ui"
@@ -43,7 +43,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   }
 
 
-  const { loading, onLogin } = useLogin({
+  const { loading, onLogin } = useUserInfo({
     onSuccess: onLoginSuccess,
     onError: onLoginError
   })

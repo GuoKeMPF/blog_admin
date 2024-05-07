@@ -18,6 +18,22 @@ export interface LoginResponseType {
 }
 
 
+export interface UserInfoType {
+	username: string
+	email: string
+	avatar: string,
+	first_name: string,
+	last_name: string,
+	is_staff: boolean,
+	is_active: boolean,
+	date_joined: string,
+	last_login: string,
+	groups: string[],
+	user_permissions: string[],
+	is_superuser: boolean
+}
+
+
 export interface PaginationType<T> {
 	data: T[]
 	count: PaginationTotalType

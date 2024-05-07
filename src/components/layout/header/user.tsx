@@ -1,3 +1,5 @@
+"use client"
+
 import {
 	Avatar,
 	AvatarFallback,
@@ -9,21 +11,24 @@ import {
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
-	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from "@/components/ui"
 
 import { useLogout } from "@/hooks";
 import { clearSession } from "@/lib";
 
+import { AuthContext } from "@/app/(app)/components/auth-pervader"
+
 import { useRouter } from "next/navigation";
 
-import React, { Fragment, type FC } from 'react'
+import React, { Fragment, useContext, type FC } from 'react'
+
+
 
 export const User: FC = () => {
 
 	const router = useRouter()
-
+	const { userInfo } = useContext(AuthContext);
 
 	const onSuccess = () => {
 		clearSession()
@@ -45,23 +50,26 @@ export const User: FC = () => {
 					<Button variant="ghost" className="relative h-8 w-8 rounded-full">
 						<Avatar>
 							<AvatarImage
-								src="https://github.com/shadcn.png"
-								alt="@shadcn"
+								src={userInfo?.avatar}
+								alt={userInfo?.username}
 							/>
-							<AvatarFallback>CN</AvatarFallback>
+							<AvatarFallback className="capitalize">{userInfo?.username}</AvatarFallback>
 						</Avatar>
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent className="w-56" align="end" forceMount>
 					<DropdownMenuLabel className="font-normal">
 						<div className="flex flex-col space-y-1">
-							<p className="text-sm font-medium leading-none">user name</p>
+							<p className="text-sm font-medium leading-none">{userInfo?.username}</p>
 							<p className="text-xs leading-none text-muted-foreground">
-								user Emile
+								{userInfo?.email}
 							</p>
 						</div>
 					</DropdownMenuLabel>
-					<DropdownMenuSeparator />
+					{/* 
+						// TODO 开发个页面
+					*/}
+					{/* <DropdownMenuSeparator />
 					<DropdownMenuGroup>
 						<DropdownMenuItem>
 							Profile
@@ -69,7 +77,7 @@ export const User: FC = () => {
 						<DropdownMenuItem>
 							Settings
 						</DropdownMenuItem>
-					</DropdownMenuGroup>
+					</DropdownMenuGroup> */}
 					<DropdownMenuSeparator />
 					<DropdownMenuItem onSelect={onLogout}>
 						Log out

@@ -14,7 +14,7 @@ interface UploadDragOwnProps extends InputProps {
 
 // 使用forwardRef创建一个转发ref的组件
 export const UploadDrag: ForwardRefExoticComponent<UploadDragOwnProps &
-	React.RefAttributes<HTMLInputElement>> = forwardRef(({ onChange, id, className, value, ...others }, ref) => {
+	React.RefAttributes<HTMLInputElement>> = forwardRef(({ onChange, id, className, placeholder, value, ...others }, ref) => {
 
 		const use_id = useId();
 
@@ -64,11 +64,14 @@ export const UploadDrag: ForwardRefExoticComponent<UploadDragOwnProps &
 					htmlFor={htmlForId}
 					className={cn(className, `w-full min-h-24 flex flex-col justify-center items-center
 					text-muted-foreground
-					rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50`)}
+					rounded-md border border-input bg-transparent px-3 py-1 shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50`)}
 					onDragEnter={onDragEnter}
 					onDragOver={onDragOver}
 					onDrop={onDrop}
-				>Click or drag file to this area to upload</Label>
+				>
+					<span className="text-lg font-bold">{placeholder}</span>
+					<span className="text-sm">Click or drag file to this area to upload</span>
+				</Label>
 				{
 					files?.map((file, index) => {
 						return <div className="text-sm text-muted-foreground" key={index}>{file.name}</div>

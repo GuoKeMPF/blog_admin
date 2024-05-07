@@ -1,5 +1,6 @@
 export * from "./useLogin"
 export * from "./useLogout"
+export * from "./useUserInfo"
 
 export * from "./useKeyPress"
 export * from "./useDashboard"
