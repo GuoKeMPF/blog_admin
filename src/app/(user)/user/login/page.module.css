@@ -1,5 +1,21 @@
 .bgShape {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 25%, 80% 40%, 100% 50%, 100% 100%, 0% 100%);
-  word-break: break-all;
-  word-wrap: break-word;
+	clip-path: polygon(
+			/* 左上 */
+			0% 0%,
+			/* 右上 */
+			100% 0%,
+			/* 六边形第一个拐点 */
+			100% calc(10% + 50px),
+			/* 六边形第二个拐点 */
+			calc(100% - 80px) calc(10% + 100px),
+			/* 六边形第三个拐点 */
+			calc(100% - 80px) calc(10% + 200px),
+			/* 六边形第四个拐点 */
+			100% calc(10% + 250px),
+			/* 右下 */
+			100% 100%,
+			/* 左下 */
+			0% 100%);
+	word-break: break-all;
+	word-wrap: break-word;
 }
