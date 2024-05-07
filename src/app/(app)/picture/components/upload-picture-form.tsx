@@ -1,6 +1,6 @@
 'use client'
 
-import { AudioParamsType } from '@/interface'
+import { PictureParamsType } from '@/interface'
 import { UploadDrag } from '@/components/form-filed'
 
 import {
@@ -28,31 +28,31 @@ const FormSchema = z.object({
 	file: z.any().optional(),
 })
 
-const defaultValues: AudioParamsType = {
+const defaultValues: PictureParamsType = {
 	description: '',
 	file: [],
 }
 
 
-type UploadAudioFormProps = {
+type UploadPictureFormProps = {
 	disabled?: boolean
 	loading?: boolean
 	actions?: ReactNode
-	initValues?: AudioParamsType
-	onSubmit: (values: AudioParamsType) => void
+	initValues?: PictureParamsType
+	onSubmit: (values: PictureParamsType) => void
 };
 
-export const UploadAudioForm: FC<UploadAudioFormProps> = ({
+export const UploadPictureForm: FC<UploadPictureFormProps> = ({
 	onSubmit: submit,
 	initValues = defaultValues, disabled = false,
 	loading = false, }) => {
-	const form = useForm<AudioParamsType>({
+	const form = useForm<PictureParamsType>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: initValues,
 		disabled: loading || disabled,
 	})
 
-	function onSubmit(data: AudioParamsType) {
+	function onSubmit(data: PictureParamsType) {
 		submit?.(data)
 	}
 
@@ -67,13 +67,16 @@ export const UploadAudioForm: FC<UploadAudioFormProps> = ({
 					name="file"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Audios</FormLabel>
+							<FormLabel>Pictures</FormLabel>
 							<FormControl>
-								<UploadDrag placeholder="Upload your audio files"
-									accept="audio/*" multiple {...field} />
+								<UploadDrag
+									placeholder="Upload your picture files"
+									accept="image/*"
+									multiple {...field}
+								/>
 							</FormControl>
 							<FormDescription>
-								This is audio files.
+								This is picture files.
 							</FormDescription>
 							<FormMessage />
 						</FormItem>
@@ -89,7 +92,7 @@ export const UploadAudioForm: FC<UploadAudioFormProps> = ({
 								<Input placeholder="description" {...field} />
 							</FormControl>
 							<FormDescription>
-								This is description for your audio.
+								This is description for your picture.
 							</FormDescription>
 							<FormMessage />
 						</FormItem>

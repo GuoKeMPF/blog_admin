@@ -4,7 +4,7 @@ import { getUserInfo } from '@/services'
 
 import { useEffect, useState } from 'react'
 
-interface UseLoginType {
+interface UseUserInfoType {
 	onSuccess?: () => void
 	onError?: (error: Error) => void
 	onFinally?: () => void
@@ -19,7 +19,7 @@ export const useUserInfo = ({
 	onSuccess,
 	onError,
 	onFinally,
-}: UseLoginType): UseLoginReturnType => {
+}: UseUserInfoType): UseLoginReturnType => {
 	const [loading, setLoading] = useState<boolean>(false)
 	const [userInfo, setUserInfo] = useState<UserInfoType>()
 

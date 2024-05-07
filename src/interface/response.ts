@@ -71,14 +71,6 @@ export interface DraftType extends DraftParamsType {
 export type Drafts = DraftType[]
 export interface DraftsResponseType extends PaginationType<DraftType> { }
 
-export type PictureType = {
-	id: ID
-	src: string
-	create_time?: string
-	name: string
-}
-export type PictureTypes = PictureType[]
-
 export interface PostType {
 	id: ID
 	content: string
@@ -116,6 +108,26 @@ export interface DeletePostParamsType {
 	id: ID
 }
 
+
+
+export type PictureType = {
+	id: ID
+	src: string
+	create_time?: string
+	name: string,
+	description: string
+	unique_name: string
+}
+export type PictureTypes = PictureType[]
+
+export interface PictureParamsType {
+	description: string
+	file?: readonly string[]
+}
+
+export interface DeletePictureParamsType {
+	id: ID
+}
 
 export type AudioType = {
 	id: ID

@@ -1,12 +1,14 @@
 'use client'
 
 import { User } from './user'
+import { ModeToggle } from "./theme";
 
 import styles from './index.module.css'
 
 import { Button } from '@/components/ui'
 import { Icons } from '@/components/icons'
 import { MobileDrawer } from '@/components/mobile-drawer'
+
 import { cn } from '@/lib'
 
 import { MOBILE_SCROLL_THRESHOLD, SCROLL_AREA_ID } from '@/lib'
@@ -111,7 +113,8 @@ export const NavHeader = memo(
 							</span>
 						)}
 
-						<div className={styles.user}>
+						<div className={cn(styles.actions, 'flex flex-row gap-4 justify-end items-center')}>
+							<ModeToggle />
 							<User />
 						</div>
 					</div>

@@ -10,5 +10,5 @@ export * from "./useLocationParams"
 // data hooks
 export * from "./draft"
 export * from "./post"
-
+export * from "./picture"
 export * from "./audio"

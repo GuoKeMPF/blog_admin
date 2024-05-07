@@ -97,19 +97,19 @@ export const Player: FC<PlayerProps> = ({ src, name, onReset, onSwitch }) => {
 		<Card>
 			<CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
 				<CardTitle className="text-md font-semibold">
-					<Button onClick={onBackward}>
+					<Button onClick={onBackward} variant="outline" size="icon">
 						<Icons.Backward />
 					</Button>
-					<Button onClick={onPlay} loading={loading} disabled={loadingError}>
+					<Button onClick={onPlay} variant="outline" size="icon" loading={loading} disabled={loadingError}>
 						<Icons.CaretRight />
 					</Button>
-					<Button onClick={onPause}>
+					<Button onClick={onPause} variant="outline" size="icon">
 						<Icons.Pause />
 					</Button>
-					<Button onClick={onStop}>
+					<Button onClick={onStop} variant="outline" size="icon">
 						<Icons.Border />
 					</Button>
-					<Button onClick={onForward}>
+					<Button onClick={onForward} variant="outline" size="icon">
 						<Icons.Forward />
 					</Button>
 				</CardTitle>

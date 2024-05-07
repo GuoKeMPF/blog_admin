@@ -59,6 +59,7 @@ export const Table: FC<TableProps> = ({ }) => {
 				onPaginationChange={setPagination}
 				action={
 					<Fragment>
+						<UploadAudio reFetch={reFetch} />
 						<Button
 							size="sm"
 							variant={'secondary'}
@@ -67,7 +68,6 @@ export const Table: FC<TableProps> = ({ }) => {
 						>
 							<Icons.Reload /> Refresh
 						</Button>
-						<UploadAudio reFetch={reFetch} />
 					</Fragment>
 				}
 			/>

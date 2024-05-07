@@ -1,6 +1,6 @@
 "use client"
 
-import { UploadAudioForm } from "./";
+import { UploadPictureForm } from ".";
 
 import {
 	Button,
@@ -13,18 +13,18 @@ import {
 
 import { Icons } from "@/components/icons";
 
-import { useCreateAudio } from "@/hooks";
+import { useCreatePictures } from "@/hooks";
 
-import { AudioParamsType } from "@/interface";
+import { PictureParamsType } from "@/interface";
 
 import React, { Fragment, type FC } from "react";
 
 
-type UploadAudioProps = {
+type UploadPictureProps = {
 	reFetch: () => void
 };
 
-export const UploadAudio: FC<UploadAudioProps> = ({ reFetch }) => {
+export const UploadPicture: FC<UploadPictureProps> = ({ reFetch }) => {
 
 	const [open, setOpen] = React.useState(false);
 
@@ -35,11 +35,11 @@ export const UploadAudio: FC<UploadAudioProps> = ({ reFetch }) => {
 
 
 
-	const { mutate, loading } = useCreateAudio({ onSuccess });
+	const { mutate, loading } = useCreatePictures({ onSuccess });
 
 
 
-	const onSubmit = (data: AudioParamsType) => {
+	const onSubmit = (data: PictureParamsType) => {
 		mutate(data)
 	}
 	return <Fragment>
@@ -48,13 +48,13 @@ export const UploadAudio: FC<UploadAudioProps> = ({ reFetch }) => {
 
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button size="sm"><Icons.Plus />Create Audio</Button>
+				<Button size="sm"><Icons.Plus />Create Picture</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>
-					<DialogTitle>Create Audio</DialogTitle>
+					<DialogTitle>Create Picture</DialogTitle>
 				</DialogHeader>
-				<UploadAudioForm loading={loading} onSubmit={onSubmit} />
+				<UploadPictureForm loading={loading} onSubmit={onSubmit} />
 			</DialogContent>
 		</Dialog>
 	</Fragment>;

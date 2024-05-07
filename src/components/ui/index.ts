@@ -1,3 +1,4 @@
+export * from './aspect-ratio'
 export * from './avatar'
 export * from './badge'
 export * from './button'
@@ -21,4 +22,6 @@ export * from './use-toast'
 export * from './scroll-area'
 export * from './select'
 export * from './separator'
+export * from './pagination'
 export * from './popover'
+

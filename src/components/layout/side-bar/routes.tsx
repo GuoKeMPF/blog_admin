@@ -47,7 +47,7 @@ export const sideBarRoutes: SideBarRoutes = [
 	{
 		title: 'Audio',
 		key: 'Digit5',
-		shortcut_key: <CommandShortcut>⌘+5</CommandShortcut>,
+		shortcut_key: <CommandShortcut>⌘5</CommandShortcut>,
 		path: '/audio',
 		icon: <Icons.Music />,
 		type: 'route',
